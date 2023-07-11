@@ -1,35 +1,51 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { UserContext } from "./context/UserProvider";
+import { Routes, Route } from "react-router-dom";
+import { useContext } from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
+import NotFound from "./routes/NotFound";
+import Register from "./routes/Register";
+import Perfil from "./routes/Perfil";
+import Login from "./routes/Login";
+import Home from "./routes/Home";
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+import LayoutContainerForm from "./components/layouts/LayoutContainerForm";
+import LayoutRequireAuth from "./components/layouts/LayoutRequireAuth";
+import LayoutRedirect from "./components/layouts/LayoutRedirect";
+import Navbar from "./components/Navbar";
+//import NavbarSuper from "./components/NavbarSuper";
 
-export default App
+
+const App = () => {
+    const { user } = useContext(UserContext);
+
+    if (user === false) {
+        return <p>Loading...</p>;
+    }
+
+    return (
+        <>
+         <Navbar />
+             {/*   <NavbarSuper /> */}
+            <Routes>
+                <Route path="/" element={<LayoutRequireAuth />}>
+                    <Route index element={<Home />} />
+                    <Route path="perfil" element={<Perfil />} />
+                </Route>
+
+                <Route path="/" element={<LayoutContainerForm />}>
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                </Route>
+
+                //NotFound //11/07
+                <Route path="*" element={<NotFound />} />
+
+                <Route path="/:nanoid" element={<LayoutRedirect />}>
+                    <Route index element={<NotFound />} />
+                </Route>
+            </Routes>
+        </>
+    );
+};
+
+export default App;
