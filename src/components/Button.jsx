@@ -3,7 +3,7 @@ import ButtonLoading from "./ButtonLoading";
 const Button = ({ text, type, color = "purple", loading, onClick }) => {
     if (loading) return <ButtonLoading />;
 
-    const classButtonBase = `focus:outline-none text-white  focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5 mb-2 `;
+    const classButtonBase = `focus:outline-none text-white  focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5 mb-3 `;
 
     let classColor;
     if (color === "purple") {

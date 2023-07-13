@@ -8,18 +8,22 @@ import {
     setDoc,
     updateDoc,
     where,
-} from "firebase/firestore/lite";
+} from "firebase/firestore";
 import { useState } from "react";
 import { db, auth } from "../firebase";
+import firebase from "firebase/compat/app";
 import { nanoid } from "nanoid";
 
+
 export const useFirestore = () => {
+    
     const [data, setData] = useState([]);
     const [error, setError] = useState();
     const [loading, setLoading] = useState({});
 
     const getData = async () => {
         try {
+            console.log( auth.currentUser.uid)
             setLoading((prev) => ({ ...prev, getData: true }));
             const dataRef = collection(db, "urls");
             const q = query(dataRef, where("uid", "==", auth.currentUser.uid));

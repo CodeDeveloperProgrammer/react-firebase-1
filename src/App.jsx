@@ -37,9 +37,6 @@ const App = () => {
                     <Route path="/register" element={<Register />} />
                 </Route>
 
-                //NotFound //11/07
-                <Route path="*" element={<NotFound />} />
-
                 <Route path="/:nanoid" element={<LayoutRedirect />}>
                     <Route index element={<NotFound />} />
                 </Route>

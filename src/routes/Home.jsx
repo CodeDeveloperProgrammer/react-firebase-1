@@ -27,7 +27,7 @@ const Home = () => {
 
     useEffect(() => {
         console.log(getData);
-        //getData(); //ESTO LO COMENTO 11/07
+        getData();
     }, []);
 
     if (loading.getData) return <p>Loading data getData...</p>;
@@ -104,7 +104,7 @@ const Home = () => {
             {data.map((item) => (
                 <div
                     key={item.nanoid}
-                    className="p-6 bg-white rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700 mb-2"
+                    className=" mt-5 p-6 bg-white rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700 mb-2"
                 >
                     <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                         {pathURL}
